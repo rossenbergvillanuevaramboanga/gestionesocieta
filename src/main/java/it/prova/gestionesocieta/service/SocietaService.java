@@ -22,8 +22,9 @@ public interface SocietaService {
 	public List<Societa> findByExample(Societa example);
 	
 	//La lista distinta delle società in cui lavora almeno un dipendente con una RAL a partire da 30000 euro
-	public List<Societa> listaSocietaConAlmenoUnDipentenConRALMaggioreA(int ral);
+
+	public List<Societa> listaSocietaConAlmenoUnDipentenConRALMaggioreA30000();
 	
-	
+
 
 }

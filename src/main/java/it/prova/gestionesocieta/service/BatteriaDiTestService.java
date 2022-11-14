@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import it.prova.gestionesocieta.exception.DeleteSocietaWithDipendentiException;
 import it.prova.gestionesocieta.model.Dipendente;
 import it.prova.gestionesocieta.model.Societa;
@@ -25,7 +26,7 @@ public class BatteriaDiTestService {
 		// TODO Auto-generated method stub
 		Long nowInMillisecondi = new Date().getTime();
 		
-		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("DD-MM-YYYY").parse("14-11-2022"));
+		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"));
 		if (nuovaSocieta.getId() != null)
 			throw new RuntimeException("testInserisciNuovaSocieta...failed: transient object con id valorizzato");
 		// salvo
@@ -40,7 +41,7 @@ public class BatteriaDiTestService {
 		// TODO Auto-generated method stub
 		
 		Societa exampleSocieta = new Societa();
-		exampleSocieta.setDataFondazione(new SimpleDateFormat("DD-MM-YYYY").parse("14-11-2022"));
+		exampleSocieta.setDataFondazione(new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"));
 		List<Societa> societaExample = societaService.findByExample(exampleSocieta);
 		
 
@@ -54,11 +55,11 @@ public class BatteriaDiTestService {
 		// TODO Auto-generated method stub
 		//Inserisco Societa
 		Long nowInMillisecondi = new Date().getTime();	
-		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("DD-MM-YYYY").parse("14-11-2022"));
+		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"));
 		societaService.inserisciNuovo(nuovaSocieta);
 		
 		//Inserisco Dipendente
-		Dipendente nuovoDipendente = new Dipendente("Pippo", "Baudo", new SimpleDateFormat("DD-MM-YYYY").parse("14-11-2022"), 50000);
+		Dipendente nuovoDipendente = new Dipendente("Pippo", "Baudo", new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"), 50000);
 		nuovoDipendente.setSocieta(nuovaSocieta);
 		dipendenteService.inserisciNuovo(nuovoDipendente);
 		
@@ -73,9 +74,21 @@ public class BatteriaDiTestService {
 		}
 	
 		dipendenteService.rimuovi(nuovoDipendente);
-		societaService.aggiorna(nuovaSocieta);
-		societaService.rimuovi(nuovaSocieta);
+		if(dipendenteService.caricaSingoloDipendente(nuovoDipendente.getId()) != null)
+			throw new RuntimeException("testRemoveDipendente...failed: inserimento fallito");
 		
+		nuovaSocieta = societaService.caricaSingolaSocieta(nuovaSocieta.getId());
+		
+		try {
+			societaService.rimuovi(nuovaSocieta);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+//		if(societaService.caricaSingolaSocieta(nuovaSocieta.getId()) != null)
+//			throw new RuntimeException("testRemoveSocieta...failed: inserimento fallito");
+			
 		System.out.println("testRemoveSocieta........OK \n");
 		
 	}
@@ -83,11 +96,11 @@ public class BatteriaDiTestService {
 	public void testInserisciDipendente() throws ParseException{
 		// TODO Auto-generated method stub
 		Long nowInMillisecondi = new Date().getTime();	
-		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("DD-MM-YYYY").parse("14-11-2022"));
+		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"));
 		societaService.inserisciNuovo(nuovaSocieta);
 		
 		//Inserisco Dipendente
-		Dipendente nuovoDipendente = new Dipendente("Pippo", "Baudo", new SimpleDateFormat("DD-MM-YYYY").parse("14-11-2022"), 50000);
+		Dipendente nuovoDipendente = new Dipendente("Pippo", "Baudo", new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"), 50000);
 		nuovoDipendente.setSocieta(nuovaSocieta);
 		dipendenteService.inserisciNuovo(nuovoDipendente);
 		
@@ -104,11 +117,11 @@ public class BatteriaDiTestService {
 	public void testModificaDipendente() throws Exception{
 		// TODO Auto-generated method stub
 		Long nowInMillisecondi = new Date().getTime();	
-		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("DD-MM-YYYY").parse("14-11-2022"));
+		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"));
 		societaService.inserisciNuovo(nuovaSocieta);
 		
 		//Inserisco Dipendente
-		Dipendente nuovoDipendente = new Dipendente("Pippo", "Baudo", new SimpleDateFormat("DD-MM-YYYY").parse("14-11-2022"), 50000);
+		Dipendente nuovoDipendente = new Dipendente("Pippo", "Baudo", new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"), 50000);
 		nuovoDipendente.setSocieta(nuovaSocieta);
 		dipendenteService.inserisciNuovo(nuovoDipendente);
 		
@@ -130,11 +143,11 @@ public class BatteriaDiTestService {
 	public void testListaSocietaConDipendenteRalMaggioreTrentaMila()  throws Exception{
 		// TODO Auto-generated method stub
 		Long nowInMillisecondi = new Date().getTime();	
-		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("DD-MM-YYYY").parse("14-11-2022"));
+		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"));
 		societaService.inserisciNuovo(nuovaSocieta);
 		
 		//Inserisco Dipendente
-		Dipendente nuovoDipendente = new Dipendente("Pippo", "Baudo", new SimpleDateFormat("DD-MM-YYYY").parse("14-11-2022"), 50000);
+		Dipendente nuovoDipendente = new Dipendente("Pippo", "Baudo", new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"), 50000);
 		nuovoDipendente.setSocieta(nuovaSocieta);
 		dipendenteService.inserisciNuovo(nuovoDipendente);
 		
@@ -142,7 +155,7 @@ public class BatteriaDiTestService {
 		societaService.aggiorna(nuovaSocieta);
 		
 		//Propper Test		
-		if(societaService.listaSocietaConAlmenoUnDipentenConRALMaggioreA(30000).size()!= 3)
+		if(societaService.listaSocietaConAlmenoUnDipentenConRALMaggioreA30000().size()!= 3)
 			throw new RuntimeException("testListaSocietaConDipendenteRalMaggioreTrentaMila...failed: inserimento fallito");
 		
 		System.out.println("testListaSocietaConDipendenteRalMaggioreTrentaMila........OK \n");
@@ -150,8 +163,27 @@ public class BatteriaDiTestService {
 
 	}
 
-	public void testDipendenteAnzianoSocietaPrima1990() {
+	public void testDipendenteAnzianoSocietaPrima1990() throws Exception{
 		// TODO Auto-generated method stub
+		//Propper Test		
+	
+		Long nowInMillisecondi = new Date().getTime();	
+		Societa nuovaSocieta = new Societa("Societa "+ nowInMillisecondi, "Via dei ", new SimpleDateFormat("dd-MM-yyyy").parse("10-11-1800"));
+		societaService.inserisciNuovo(nuovaSocieta);
+		
+		//Inserisco Dipendente
+		Dipendente nuovoDipendente = new Dipendente("Pippo", "Baudo", new SimpleDateFormat("dd-MM-yyyy").parse("14-11-2022"), 50000);
+		nuovoDipendente.setSocieta(nuovaSocieta);
+		dipendenteService.inserisciNuovo(nuovoDipendente);
+		
+		nuovaSocieta.getDipendenti().add(nuovoDipendente);
+		societaService.aggiorna(nuovaSocieta);
+		
+		if(dipendenteService.caricaDipendentePiuAnzianoSocietaFondatePrimaDel1990()==null)
+			throw new RuntimeException("testListaSocietaConDipendenteRalMaggioreTrentaMila...failed: inserimento fallito");
+		
+		System.out.println("testListaSocietaConDipendenteRalMaggioreTrentaMila........OK \n");
+
 		
 	}
 

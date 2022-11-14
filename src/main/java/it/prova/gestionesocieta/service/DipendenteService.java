@@ -1,5 +1,6 @@
 package it.prova.gestionesocieta.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import it.prova.gestionesocieta.model.Dipendente;
@@ -21,7 +22,7 @@ public interface DipendenteService {
 	//Other methods
 
 	//dipendente più anziano  - lavorativamente parlando – delle società fondate prima del 1990
-	public Dipendente caricaDipendentePiuAnzianoSocietaFondatePrimaDel1990();
+	public Dipendente caricaDipendentePiuAnzianoSocietaFondatePrimaDel1990() throws ParseException;
 
 	
 	

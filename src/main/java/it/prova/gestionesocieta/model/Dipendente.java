@@ -27,7 +27,7 @@ public class Dipendente {
 	@Column(name = "cognome")
 	private String cognome;
 	@Column(name = "dataAssunzione")
-	private Date dataAssunzioneDate;
+	private Date dataAssunzione;
 	@Column(name = "redditoAnnuoLordo")
 	private Integer redditoAnnuoLordo;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -38,20 +38,20 @@ public class Dipendente {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Dipendente(String nome, String cognome, Date dataAssunzioneDate, Integer redditoAnnuoLordo) {
+	public Dipendente(String nome, String cognome, Date dataAssunzione, Integer redditoAnnuoLordo) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
-		this.dataAssunzioneDate = dataAssunzioneDate;
+		this.dataAssunzione = dataAssunzione;
 		this.redditoAnnuoLordo = redditoAnnuoLordo;
 	}
 
-	public Dipendente(Long id, String nome, String cognome, Date dataAssunzioneDate, Integer redditoAnnuoLordo,
+	public Dipendente(Long id, String nome, String cognome, Date dataAssunzione, Integer redditoAnnuoLordo,
 			Societa societa) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
-		this.dataAssunzioneDate = dataAssunzioneDate;
+		this.dataAssunzione = dataAssunzione;
 		this.redditoAnnuoLordo = redditoAnnuoLordo;
 		this.societa = societa;
 	}
@@ -81,11 +81,11 @@ public class Dipendente {
 	}
 
 	public Date getDataAssunzioneDate() {
-		return dataAssunzioneDate;
+		return dataAssunzione;
 	}
 
-	public void setDataAssunzioneDate(Date dataAssunzioneDate) {
-		this.dataAssunzioneDate = dataAssunzioneDate;
+	public void setDataAssunzione(Date dataAssunzione) {
+		this.dataAssunzione = dataAssunzione;
 	}
 
 	public Integer getRedditoAnnuoLordo() {
@@ -106,8 +106,8 @@ public class Dipendente {
 
 	@Override
 	public String toString() {
-		return "Dipendente [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", dataAssunzioneDate="
-				+ dataAssunzioneDate + ", redditoAnnuoLordo=" + redditoAnnuoLordo + "]";
+		return "Dipendente [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", dataAssunzione="
+				+ dataAssunzione + ", redditoAnnuoLordo=" + redditoAnnuoLordo + "]";
 	}
 	
 	

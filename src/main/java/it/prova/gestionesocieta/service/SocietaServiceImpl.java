@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -78,8 +79,9 @@ public class SocietaServiceImpl implements SocietaService {
 	}
 
 	@Override
-	public List<Societa> listaSocietaConAlmenoUnDipentenConRALMaggioreA(int ral) {
+	public List<Societa> listaSocietaConAlmenoUnDipentenConRALMaggioreA30000() {
 		// TODO Auto-generated method stub
+		int ral = 30000;
 		return (List<Societa>) societaRepository.findAllDistinctByDipendenti_RedditoAnnuoLordoGreaterThan(ral);
 	}
 	
